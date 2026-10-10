@@ -4,7 +4,7 @@ import { addItem } from './CartSlice';
 import CartItem from './CartItem';
 import './ProductList.css';
 
-function ProductList() {
+function ProductList({ onHomeClick }) {
   const [showCart, setShowCart] = useState(false);
   const [addedNodes, setAddedNodes] = useState({});
   const dispatch = useDispatch();
@@ -156,6 +156,10 @@ function ProductList() {
     e.preventDefault();
     setShowCart(false);
   };
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    if (onHomeClick) onHomeClick();
+  };
 
   const handleContinueShopping = (e) => {
     e.preventDefault();
@@ -178,6 +182,9 @@ function ProductList() {
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
+          <a href="#" onClick={handleHomeClick} style={{ color: 'white', fontSize: '20px', textDecoration: 'none' }}>
+            Home
+          </a>
           <a href="#" onClick={handlePlantsClick} style={{ color: 'white', fontSize: '20px', textDecoration: 'none' }}>
             Plants
           </a>

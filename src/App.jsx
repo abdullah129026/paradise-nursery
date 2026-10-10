@@ -30,7 +30,7 @@ function App() {
         </div>
       ) : (
         <div className={`product-list-container ${showProductList ? 'visible' : ''}`}>
-          <ProductList />
+          <ProductList onHomeClick={() => setShowProductList(false)} />
         </div>
       )}
     </div>
