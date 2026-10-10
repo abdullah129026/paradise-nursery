@@ -1,23 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
-// TODO (Task 5): implement the Redux slice for the shopping cart.
-// The slice needs reducers that:
-// - add a plant to the cart (with quantity handling if it is already there)
-// - remove a plant from the cart
-// - increase / decrease the quantity of a cart item
-// Think about what the initial state should hold (e.g. the list of items).
-
-const cartSlice = createSlice({
+export const CartSlice = createSlice({
   name: 'cart',
   initialState: {
-    items: [],
+    items: [], // Initialize items as an empty array
   },
   reducers: {
-    // TODO: addItem
-    // TODO: removeItem
-    // TODO: updateQuantity (increase / decrease)
+    // Add item to cart or increment quantity if it already exists
+    addItem: (state, action) => {
+      const { name, image, cost } = action.payload;
+      const existingItem = state.items.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        state.items.push({ name, image, cost, quantity: 1 });
+      }
+    },
+    // Remove item completely from cart by name
+    removeItem: (state, action) => {
+      state.items = state.items.filter(item => item.name !== action.payload);
+    },
+    // Update quantity of a specific item
+    updateQuantity: (state, action) => {
+      const { name, quantity } = action.payload;
+      const itemToUpdate = state.items.find(item => item.name === name);
+      if (itemToUpdate) {
+        itemToUpdate.quantity = quantity;
+      }
+    },
   },
-})
+});
 
-export const { /* TODO: export the actions */ } = cartSlice.actions
-export default cartSlice.reducer
+export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
+
+export default CartSlice.reducer;
