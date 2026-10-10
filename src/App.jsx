@@ -1,17 +1,40 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import './App.css'
+import React, { useState } from 'react';
+import ProductList from './ProductList';
+import './App.css';
 
-// TODO (Task 4): build the Paradise Nursery landing page.
-// It must show the company name and a "Get Started" button
-// that takes the user to the product listing page.
 function App() {
+  const [showProductList, setShowProductList] = useState(false);
+
+  const handleGetStartedClick = () => {
+    setShowProductList(true);
+  };
+
   return (
-    <div className="landing-page">
-      {/* TODO: company name heading */}
-      {/* TODO: "Get Started" button linking to the plants page */}
+    <div className="app-container">
+      {!showProductList ? (
+        <div className="landing-page">
+          <div className="background-image"></div>
+          <div className="content">
+            <div className="landing_content">
+              <h1>Welcome To Paradise Nursery</h1>
+              <div className="divider"></div>
+              <p>Where Green Meets Serenity</p>
+              <button className="get-started-button" onClick={handleGetStartedClick}>
+                Get Started
+              </button>
+            </div>
+            <div className="aboutus_container">
+              {/* You can render your AboutUs component here */}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={`product-list-container ${showProductList ? 'visible' : ''}`}>
+          <ProductList />
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
