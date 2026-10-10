@@ -1,0 +1,6 @@
+/* TODO (Task 3): style the Paradise Nursery landing page.
+   The landing page must show a background image. */
+
+.landing-page {
+  min-height: 100vh;
+}
